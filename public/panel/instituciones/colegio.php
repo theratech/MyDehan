@@ -53,6 +53,10 @@ $res = mysqli_query($D,$query);
 							  <li <?php if($_GET['tab']=="2"){ ?>class="active"<?php }?>><a href="?type=info&id=<?php echo $_GET['id'];?>&tab=2&view=1">Institución</a></li>
 							  <?php if($sesion['u_rango']!=4){?><li <?php if($_GET['tab']=="3"){ ?>class="active"<?php }?>><a href="?type=info&id=<?php echo $_GET['id'];?>&tab=3">Pagos</a></li><?php }?>
 							  <?php if($sesion['u_rango']==7||$sesion['u_rango']==8||$sesion['u_rango']==4||$sesion['u_rango']==3||$sesion['u_rango']==5){?><li <?php if($_GET['tab']=="4"){ ?>class="active"<?php }?>><a href="?type=info&id=<?php echo $_GET['id'];?>&tab=4">Notificar Captura</a></li><?php }?>
+
+							  <?php if($sesion['u_rango']==7||$sesion['u_rango']==8||$sesion['u_rango']==3){
+								?>	<li><a href="/activity?c=<?php echo $_GET['id'];?>">Actividad</a></li><?php
+							  	}?>
 							</ul>
 
 							<!-- Tab panes -->

@@ -35,6 +35,7 @@ include("inc/head.php");?>
 							<ul class="nav nav-tabs">
 							  <li class="active"><a href="posts.html#posts" data-toggle="tab">Colegios</a></li>
 							  <li><a href="#makepost" data-toggle="tab">Nuevo Colegio</a></li>
+							  <li><a href="/activity">Actividad</a></li>
 							</ul>
 
 							<!-- Tab panes -->
