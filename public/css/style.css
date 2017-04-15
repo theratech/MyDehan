@@ -1,0 +1,21 @@
+/* My DeHan (C) 2014 */
+
+
+/* Login Page */
+
+.bubble{
+	width:360px !important;
+	height:360px !important;
+	border-radius:50% !important;
+	display:block;
+}
+.modal-alerta{
+	padding:20px;
+	width:200px;
+	margin-top:-450px;
+	display:block;
+	position:absolute;
+	background:rgba(256,256,256,0.5);
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
