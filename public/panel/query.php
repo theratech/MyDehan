@@ -437,53 +437,44 @@ if(isset($_GET['func'])&&$_GET['func']=="nusuario"){
 			$que2 = mysqli_query($D,$query2);
 			$query3 = "INSERT INTO alumnos_libros VALUES(0,'$id','$u_libro','".date('17-m-Y')."','".date('d-m-Y')."','0','-1','$u_libro','0','1')";
 			$que3 = mysqli_query($D,$query3);
-			require_once("send/class.phpmailer.php");
-			include("send/class.smtp.php");
-			
-			$mail             = new PHPMailer();
-			$body             = "<h1>Hola, ".$_POST['u_nombres']."</h1>
-													Hemos creado tu usuario <b>".$u_curp."</b>, para <i>MyDehan</i>.<div class='im'><hr>
-													
-													<h2>Puedes accesar ya!</h2>
-													<h4><a href='http://http://my.dehanmatematicas.com/' target='_blank'>INICIA SESIÓN AQUÍ</a></h4>
-													</div><ul>
-													<li>Usuario: <b>".$u_curp."</b></li>
-													<li>Contraseña: <b>".$pw."</b></li><div class='im'>
-													<hr>
-													Un saludo, 
-													El equipo de <b>MyDehan</b>.
-			
-			
-			</div></ul>";
-			
-			$mail->IsSMTP(); // telling the class to use SMTP
-			$mail->Host       = getPassword("mailServer"); // SMTP server
-			$mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
-													   // 1 = errors and messages
-													   // 2 = messages only
-			$mail->SMTPAuth   = true;                  // enable SMTP authentication
-			$mail->Port       = 25;                    // set the SMTP port for the GMAIL server
-			$mail->Username   = getPassword("mailUser"); // SMTP account username
-			$mail->Password   = getPassword("mail");        // SMTP account password
-			
-			$mail->SetFrom(getPassword("mailUser"), 'Bienvenido a MyDehan');
-			
-			$mail->AddReplyTo($_POST['u_mail'],$_POST['u_nombres']." ".$_POST['u_apellidos']);
-			
-			$mail->Subject    = "MyDehan : Password";
-			
-			$mail->AltBody    = "Este mensaje requiere lector de HTML"; // optional, comment out and test
-			
-			$mail->MsgHTML($body);
-			
-			$address = $_POST['u_mail'];
-			$mail->AddAddress($_POST['u_mail'],$_POST['u_nombres']." ".$_POST['u_apellidos']);
-			
-			if(!$mail->Send()) {
-			  echo $mail->ErrorInfo." &times;";
-			} else {
-			  echo "√";
-			}
+
+				// Varios destinatarios
+				$para  = $_POST['u_mail'];
+
+				// título
+				$título = 'Bienvenido a MyDEHAN';
+
+				// mensaje
+				$mensaje = '
+				<h1>Hola, '.$_POST['u_nombres'].'</h1>
+				Hemos creado tu usuario <b>'.$u_curp.'</b>, para <i>MyDehan</i>.
+				<div class="im"><hr>
+					<h2>Puedes accesar ya!</h2>
+					<h4><a href="https://www.mydehan.com/" target="_blank">INICIA SESIÓN AQUÍ</a></h4>
+				</div>
+				<ul>
+					<li>Usuario: <b>'.$u_curp.'</b></li>
+					<li>Contraseña: <b>'.$pw.'</b></li>
+					<div class="im">
+						<hr>
+						Un saludo, 
+						El equipo de <b>MyDehan</b>.
+					</div>
+				</ul>
+				';
+
+				// Para enviar un correo HTML, debe establecerse la cabecera Content-type
+				$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+				$cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+				// Cabeceras adicionales
+				$cabeceras .= 'To: '.$_POST['u_nombres']." ".$_POST['u_apellidos'].' <'.$_POST['u_mail'].'>' . "\r\n";
+				$cabeceras .= 'From: MyDEHAN <'.getPassword("mailUser").'>' . "\r\n";
+
+				// Enviarlo
+				mail($para, $título, $mensaje, $cabeceras);
+				
+				echo "√";
 			
 	}
 	if($_GET['type']=="colteacher"){
