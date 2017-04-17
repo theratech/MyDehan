@@ -13,6 +13,22 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function print(Request $request)
+    {   
+        if($request->get('c')){
+            $activity = Activity::where('sc_colegio','=',$request->get('c'))->latest('sc_fecha')->get();
+            $colegio = Colegio::where('col_id','=',$request->get('c'))->get();
+        }else{
+            $activity = Activity::latest('sc_fecha')->get();
+            $colegio = null;
+        }
+        $metadata = [
+            'activities' => $activity,
+            'colegio' => $colegio,
+            'request' => $request
+        ];
+        return view('activity.print',$metadata);
+    }
     public function index(Request $request)
     {
         if($request->get('c')){

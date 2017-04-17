@@ -47,7 +47,11 @@ $sesion =$_SESSION["loggedIn"];
 				@endif
                 @if($request->get('c'))
 				<?php if($sesion['u_rango']==3||$sesion['u_rango']==8||$sesion['u_rango']==7){?>
-					<p><a class="btn btn-primary pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" data-toggle="modal" data-target="#addActiv"><i class="fa fa-plus"></i> Agregar Actividad</a></p>
+					<p><a class="btn btn-primary pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" data-toggle="modal" data-target="#addActiv"><i class="fa fa-plus"></i> Agregar Actividad</a><a class="btn btn-default pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" href="/print?c={{$request->get('c')}}"><i class="fa fa-print"></i> Imprimir Tabla</a></p>
+				<?php } ?>
+				@else
+				<?php if($sesion['u_rango']==3||$sesion['u_rango']==8||$sesion['u_rango']==7){?>
+					<p><a class="btn btn-default pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" href="/print?c={{$request->get('c')}}"><i class="fa fa-print"></i> Imprimir Tabla</a></p>
 				<?php } ?>
 				@endif
 
