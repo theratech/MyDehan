@@ -6,6 +6,11 @@ error_reporting(0);
 session_start();
 $sesion =$_SESSION["loggedIn"];    
 ?>
+<style>
+#mainTable_length{
+	display:none !important;
+}
+</style>
 	<div class="blue-block">
 		<div class="page-title">
 			@if(!$colegio)
@@ -47,7 +52,11 @@ $sesion =$_SESSION["loggedIn"];
 				@endif
                 @if($request->get('c'))
 				<?php if($sesion['u_rango']==3||$sesion['u_rango']==8||$sesion['u_rango']==7){?>
-					<p><a class="btn btn-primary pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" data-toggle="modal" data-target="#addActiv"><i class="fa fa-plus"></i> Agregar Actividad</a></p>
+					<p><a class="btn btn-primary pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" data-toggle="modal" data-target="#addActiv"><i class="fa fa-plus"></i> Agregar Actividad</a><a class="btn btn-default pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" href="/print?c={{$request->get('c')}}"><i class="fa fa-print"></i> Imprimir Tabla</a></p>
+				<?php } ?>
+				@else
+				<?php if($sesion['u_rango']==3||$sesion['u_rango']==8||$sesion['u_rango']==7){?>
+					<p><a class="btn btn-default pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" href="/print?c={{$request->get('c')}}"><i class="fa fa-print"></i> Imprimir Tabla</a></p>
 				<?php } ?>
 				@endif
 
@@ -55,7 +64,7 @@ $sesion =$_SESSION["loggedIn"];
 					<div class="tab-pane fade active in" id="posts" style="min-height:300px; margin-bottom:20px;">
 						<div id="tabla1">
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="mainTable">
                                     <thead>
                                         <tr>
                                         	@if(!$request->get('c'))
@@ -145,6 +154,15 @@ $sesion =$_SESSION["loggedIn"];
 @section("scripts")
 <script>
 	$(document).ready(function(){
+		$('#mainTable').DataTable({
+	        "language": {
+	            "lengthMenu": "_MENU_ resultados por Pagina",
+	            "zeroRecords": "No hay resultados",
+	            "info": "_PAGE_ de _PAGES_",
+	            "infoEmpty": "No hay registros",
+	            "infoFiltered": ""
+	        }
+	    });
 		$("#newAct").submit(function() {
 		    $.ajax({
 		           type: "POST",
@@ -152,7 +170,11 @@ $sesion =$_SESSION["loggedIn"];
 		           data: $("#newAct").serialize(), // serializes the form's elements.
 				   beforeSend: function(){
 						$(".saveBtn").attr('disabled','disabled');
-						swal("info","Procesando");
+						swal({
+						  title: "Procesando",
+						  text: "Se está enviando tu formulario",
+						  type: "success",
+						});
 				   },
 		           success: function(data)
 		           {

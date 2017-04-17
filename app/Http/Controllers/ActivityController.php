@@ -13,6 +13,22 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function print(Request $request)
+    {   
+        if($request->get('c')){
+            $activity = Activity::where('sc_colegio','=',$request->get('c'))->latest('sc_fecha')->get();
+            $colegio = Colegio::where('col_id','=',$request->get('c'))->get();
+        }else{
+            $activity = Activity::latest('sc_fecha')->get();
+            $colegio = null;
+        }
+        $metadata = [
+            'activities' => $activity,
+            'colegio' => $colegio,
+            'request' => $request
+        ];
+        return view('activity.print',$metadata);
+    }
     public function index(Request $request)
     {
         if($request->get('c')){
@@ -55,17 +71,6 @@ class ActivityController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -73,7 +78,11 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activity = Activity::where('sc_id',$id)->first();
+        $metadata = [
+            'activity' => $activity,
+        ];
+        return view('activity.edit',$metadata);
     }
 
     /**
@@ -85,7 +94,20 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $activity = Activity::where('sc_id',$id)->first();
+
+        $activity->timestamps = false;
+
+        if(
+            $activity->update([
+                'sc_motivo' => $request->titulo,
+                'sc_observacion' => $request->observacion,
+            ])
+        ){
+            return "true";
+        }else{
+            return "false";
+        }
     }
 
     /**

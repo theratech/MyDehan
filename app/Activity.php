@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
+	protected $fillable = ['sc_motivo', 'sc_observacion', 'sc_fecha'];
+
+	public $primaryKey  = 'sc_id';
+
     protected $table = 'seguimiento_colegios';
 
     public function colegio(){

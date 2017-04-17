@@ -70,23 +70,23 @@ $res = mysqli_query($D,$query);
         
         <!-- Styles -->
         <!-- Bootstrap CSS -->
-        <link href="panel/css/bootstrap.min.css" rel="stylesheet">
-        <link href="panel/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+        <link href="/panel/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/panel/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
         <!-- jQuery UI -->
-        <link href="panel/css/jquery-ui.css" rel="stylesheet">
+        <link href="/panel/css/jquery-ui.css" rel="stylesheet">
         
         
       <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
         <!-- Bootstrap Switch -->
-        <link href="panel/css/bootstrap-switch.css" rel="stylesheet">
+        <link href="/panel/css/bootstrap-switch.css" rel="stylesheet">
         <!-- jQuery Datatables -->
-        <link href="panel/css/jquery.dataTables.css" rel="stylesheet">
+        <link href="/panel/css/jquery.dataTables.css" rel="stylesheet">
         <!-- jQuery prettyPhoto -->
-        <link href="panel/css/prettyPhoto.css" rel="stylesheet">  
+        <link href="/panel/css/prettyPhoto.css" rel="stylesheet">  
         <!-- Font awesome CSS -->
-        <link href="panel/css/font-awesome.min.css" rel="stylesheet">     
+        <link href="/panel/css/font-awesome.min.css" rel="stylesheet">     
         <!-- Custom CSS -->
-        <link href="panel/css/style.css?version" rel="stylesheet">
+        <link href="/panel/css/style.css?version" rel="stylesheet">
         
         <!--[if IE]>
             <link rel="stylesheet" type="text/css" href="css/style-ie.css" />
@@ -110,14 +110,14 @@ $res = mysqli_query($D,$query);
                   <div class="logo">
                   <?php if (date("m-d")=="07-10"){
                       ?>
-                     <h1><a href="dashboard.php"><img src="../img/identilogoplus.bug.gif" width="205px"></a></h1>
+                     <h1><a href="dashboard.php"><img src="/img/identilogoplus.bug.gif" width="205px"></a></h1>
                      <?php }else{
                          if ($sesion['u_activo']==2){
                       ?>
-                     <h1><a href="dashboard.php"><img src="../img/identilogoplus.png" width="245px"></a></h1>
+                     <h1><a href="dashboard.php"><img src="/img/identilogoplus.png" width="245px"></a></h1>
                      <?php }else{
                             ?>
-                     <h1><a href="dashboard.php"><img src="../img/identilogo.png" width="200px"></a></h1>
+                     <h1><a href="dashboard.php"><img src="/img/identilogo.png" width="200px"></a></h1>
                      <?php } }?>
                   </div>
                   <!-- Logo ends -->
@@ -242,19 +242,19 @@ $res = mysqli_query($D,$query);
         
       <!-- Javascript files -->
       <!-- jQuery -->
-      <script src="panel/js/jquery.knob.js"></script>
-      <script src="panel/js/raphael.js"></script>
+      <script src="/panel/js/jquery.knob.js"></script>
+      <script src="/panel/js/raphael.js"></script>
       <!-- Bootstrap JS -->
-      <script src="panel/js/bootstrap.min.js"></script>
-      <script src="panel/js/bootstrap-select.js"></script>
-      <script src="panel/js/typeahead.js"></script>
-    <script type="text/javascript" src="panel/js/moment.min.js"></script>
+      <script src="/panel/js/bootstrap.min.js"></script>
+      <script src="/panel/js/bootstrap-select.js"></script>
+      <script src="/panel/js/typeahead.js"></script>
+    <script type="text/javascript" src="/panel/js/moment.min.js"></script>
         
-    <script type="text/javascript" src="panel/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/panel/js/bootstrap-datetimepicker.min.js"></script>
       <!-- Sparkline for Mini charts -->
-      <script src="panel/js/sparkline.js"></script>
+      <script src="/panel/js/sparkline.js"></script>
       <!-- jQuery UI -->
-      <script src="panel/js/morris.js"></script>
+      <script src="/panel/js/morris.js"></script>
       <?php if($_GET['type']=="userview"){
          ?>
          <script>
@@ -313,19 +313,19 @@ $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"
       <!-- jQuery Knob -->
 
       <!-- jQuery Data Tables -->
-      <script src="panel/js/jquery.dataTables.min.js"></script>
+      <script src="/panel/js/jquery.dataTables.min.js"></script>
       <!-- jQuery Knob -->
-      <script src="panel/js/bootstrap-switch.min.js"></script>
+      <script src="/panel/js/bootstrap-switch.min.js"></script>
       <!-- jQuery Knob -->
-      <script src="panel/js/jquery.rateit.min.js"></script>
+      <script src="/panel/js/jquery.rateit.min.js"></script>
       <!-- jQuery prettyPhoto -->
-      <script src="panel/js/jquery.prettyPhoto.js"></script>
+      <script src="/panel/js/jquery.prettyPhoto.js"></script>
       <!-- Respond JS for IE8 -->
-      <script src="panel/js/respond.min.js"></script>
+      <script src="/panel/js/respond.min.js"></script>
       <!-- HTML5 Support for IE -->
-      <script src="panel/js/html5shiv.js"></script>
-      <script src="panel/js/chart.js"></script>
-      <script src="panel/js/require.js"></script>
+      <script src="/panel/js/html5shiv.js"></script>
+      <script src="/panel/js/chart.js"></script>
+      <script src="/panel/js/require.js"></script>
 
       <!-- Javascript for this page -->
       

@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('activity', 'ActivityController');
-
+Route::get('/print','ActivityController@print');
 Auth::routes();
