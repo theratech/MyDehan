@@ -56,9 +56,12 @@ table{
                                     </tbody>
                 				</table>
 
+      <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
       <script>
       	window.print();
-      	window.history.back();
+      	setTimeout(function(){
+      		window.history.back();
+      	},200)
       </script>
 					</html>
 
