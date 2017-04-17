@@ -71,17 +71,6 @@ class ActivityController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -89,7 +78,11 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activity = Activity::where('sc_id',$id)->first();
+        $metadata = [
+            'activity' => $activity,
+        ];
+        return view('activity.edit',$metadata);
     }
 
     /**
@@ -101,7 +94,20 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $activity = Activity::where('sc_id',$id)->first();
+
+        $activity->timestamps = false;
+
+        if(
+            $activity->update([
+                'sc_motivo' => $request->titulo,
+                'sc_observacion' => $request->observacion,
+            ])
+        ){
+            return "true";
+        }else{
+            return "false";
+        }
     }
 
     /**

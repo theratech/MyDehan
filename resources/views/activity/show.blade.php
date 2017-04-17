@@ -156,7 +156,11 @@ $sesion =$_SESSION["loggedIn"];
 		           data: $("#newAct").serialize(), // serializes the form's elements.
 				   beforeSend: function(){
 						$(".saveBtn").attr('disabled','disabled');
-						swal("info","Procesando");
+						swal({
+						  title: "Procesando",
+						  text: "Se está enviando tu formulario",
+						  type: "success",
+						});
 				   },
 		           success: function(data)
 		           {
