@@ -1,5 +1,24 @@
 <?php 
 /* FUNCIONES CONSTRUIDAS 2015 */
+function getPassword($i){
+	switch ($i) {
+		case 'mailServer':
+			return "mail@cosmos.ink";
+			break;
+		case 'mailUser':
+			return "cuentas@mydehan.com";
+			break;
+		case 'mail':
+			return "d3h4nM4t3";
+			break;
+		case '2':
+			return false;
+			break;
+		default:
+			return false;
+			break;
+	}
+}
 if(isset($_GET['f'])&&$_GET['f']=='notify'){
 	require_once("../conexion.php");
 	date_default_timezone_set ('America/mexico_city');
@@ -438,16 +457,16 @@ if(isset($_GET['func'])&&$_GET['func']=="nusuario"){
 			</div></ul>";
 			
 			$mail->IsSMTP(); // telling the class to use SMTP
-			$mail->Host       = "mail.dehanmatematicas.com"; // SMTP server
+			$mail->Host       = getPassword("mailServer"); // SMTP server
 			$mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
 													   // 1 = errors and messages
 													   // 2 = messages only
 			$mail->SMTPAuth   = true;                  // enable SMTP authentication
 			$mail->Port       = 25;                    // set the SMTP port for the GMAIL server
-			$mail->Username   = "noreply@dehanmatematicas.com"; // SMTP account username
-			$mail->Password   = "CAde#OZM(0*G";        // SMTP account password
+			$mail->Username   = getPassword("mailUser"); // SMTP account username
+			$mail->Password   = getPassword("mail");        // SMTP account password
 			
-			$mail->SetFrom('noreply@dehanmatematicas.com', 'Bienvenido a MyDehan');
+			$mail->SetFrom(getPassword("mailUser"), 'Bienvenido a MyDehan');
 			
 			$mail->AddReplyTo($_POST['u_mail'],$_POST['u_nombres']." ".$_POST['u_apellidos']);
 			
@@ -526,16 +545,17 @@ if(isset($_GET['func'])&&$_GET['func']=="nusuario"){
 			</div></ul>";
 			
 			$mail->IsSMTP(); // telling the class to use SMTP
-			$mail->Host       = "mail.dehanmatematicas.com"; // SMTP server
+			
+			$mail->Host       = getPassword("mailServer"); // SMTP server
 			$mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
 													   // 1 = errors and messages
 													   // 2 = messages only
 			$mail->SMTPAuth   = true;                  // enable SMTP authentication
 			$mail->Port       = 25;                    // set the SMTP port for the GMAIL server
-			$mail->Username   = "noreply@dehanmatematicas.com"; // SMTP account username
-			$mail->Password   = "CAde#OZM(0*G";        // SMTP account password
+			$mail->Username   = getPassword("mailUser"); // SMTP account username
+			$mail->Password   = getPassword("mail");        // SMTP account password
 			
-			$mail->SetFrom('noreply@dehanmatematicas.com', 'Bienvenido a MyDehan');
+			$mail->SetFrom(getPassword("mailUser"), 'Bienvenido a MyDehan');
 			
 			$mail->AddReplyTo($_POST['u_mail'],$_POST['u_nombres']." ".$_POST['u_apellidos']);
 			
@@ -610,16 +630,17 @@ if(isset($_GET['func'])&&$_GET['func']=="nusuario"){
 			</div></ul>";
 			
 			$mail->IsSMTP(); // telling the class to use SMTP
-			$mail->Host       = "mail.dehanmatematicas.com"; // SMTP server
+			
+			$mail->Host       = getPassword("mailServer"); // SMTP server
 			$mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
 													   // 1 = errors and messages
 													   // 2 = messages only
 			$mail->SMTPAuth   = true;                  // enable SMTP authentication
 			$mail->Port       = 25;                    // set the SMTP port for the GMAIL server
-			$mail->Username   = "noreply@dehanmatematicas.com"; // SMTP account username
-			$mail->Password   = "CAde#OZM(0*G";        // SMTP account password
+			$mail->Username   = getPassword("mailUser"); // SMTP account username
+			$mail->Password   = getPassword("mail");        // SMTP account password
 			
-			$mail->SetFrom('noreply@dehanmatematicas.com', 'Bienvenido a MyDehan');
+			$mail->SetFrom(getPassword("mailUser"), 'Bienvenido a MyDehan');
 			
 			$mail->AddReplyTo($_POST['u_mail'],$_POST['u_nombres']." ".$_POST['u_apellidos']);
 			
@@ -700,16 +721,17 @@ if(isset($_GET['func'])&&$_GET['func']=="nusuario"){
 			</div></ul>";
 			
 			$mail->IsSMTP(); // telling the class to use SMTP
-			$mail->Host       = "mail.dehanmatematicas.com"; // SMTP server
+			
+			$mail->Host       = getPassword("mailServer"); // SMTP server
 			$mail->SMTPDebug  = 0;                     // enables SMTP debug information (for testing)
 													   // 1 = errors and messages
 													   // 2 = messages only
 			$mail->SMTPAuth   = true;                  // enable SMTP authentication
 			$mail->Port       = 25;                    // set the SMTP port for the GMAIL server
-			$mail->Username   = "noreply@dehanmatematicas.com"; // SMTP account username
-			$mail->Password   = "CAde#OZM(0*G";        // SMTP account password
+			$mail->Username   = getPassword("mailUser"); // SMTP account username
+			$mail->Password   = getPassword("mail");        // SMTP account password
 			
-			$mail->SetFrom('noreply@dehanmatematicas.com', 'Bienvenido a MyDehan');
+			$mail->SetFrom(getPassword("mailUser"), 'Bienvenido a MyDehan');
 			
 			$mail->AddReplyTo($_POST['u_mail'],$_POST['u_nombres']." ".$_POST['u_apellidos']);
 			
