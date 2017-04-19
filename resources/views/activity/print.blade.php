@@ -8,7 +8,7 @@ $sesion =$_SESSION["loggedIn"];
 <style>
 html{
 	padding:30px;
-	font-size:14px !important;	
+	font-size:11px !important;	
 	display:none;
 }
 td{
