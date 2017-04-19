@@ -61,12 +61,12 @@ $sesion =$_SESSION["loggedIn"];
                                         	@if(!$request->get('c'))
                                             <th>Colegio</th>
                                             @endif
-                                            <th data-selected>Fecha</th>
+                                            <th>Fecha</th>
                                             <th>Motivo</th>
                                             <th>Observacion</th>
                                             <th>Usuario</th>
                                         	@if($request->get('c'))
-                                            <th width="100px"></th>
+                                            <th data-width="100px"></th>
                                             @endif
                                         </tr>
                                     </thead>
@@ -170,8 +170,13 @@ $sesion =$_SESSION["loggedIn"];
 			        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 			    }
 			},
-    		"order": [[ 1, "desc" ]],
+			@if(!$colegio)
+ 				"order": [[ 1, "desc" ]],
+			@else
+				"order": [[ 0, "desc" ]],
+			@endif
     		"lengthMenu": [[20, 35, 50, -1], [20, 35, 50, "Todo"]],
+    		"autoWidth": false,
     		buttons: ['pdf']
     	});
 
