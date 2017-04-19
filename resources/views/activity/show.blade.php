@@ -1,16 +1,11 @@
 @extends('layouts.app')
-@section('title','Actividad')
+@section('title','Seguimiento')
 @section('content')
 <?php 
 error_reporting(0);
 session_start();
 $sesion =$_SESSION["loggedIn"];    
 ?>
-<style>
-#mainTable_length{
-	display:none !important;
-}
-</style>
 	<div class="blue-block">
 		<div class="page-title">
 			@if(!$colegio)
@@ -41,22 +36,18 @@ $sesion =$_SESSION["loggedIn"];
 					<li>
 						<a href="panel/institucion.php?type=info&amp;id=4368953&amp;tab=4">Notificar Captura</a>
 					</li>
-					<li class="active"><a>Actividad</a></li>
+					<li class="active"><a>Seguimiento</a></li>
 				</ul>
 				@else
 				<ul class="nav nav-tabs">
 					<li><a href="panel/institucion.php?type=colegio">Colegios</a></li>
 					<li><a href="panel/institucion.php?type=colegio">Nuevo Colegio</a></li>
-					<li class="active"><a>Actividad</a></li>
+					<li class="active"><a>Seguimiento</a></li>
 				</ul>
 				@endif
                 @if($request->get('c'))
 				<?php if($sesion['u_rango']==3||$sesion['u_rango']==8||$sesion['u_rango']==7){?>
-					<p><a class="btn btn-primary pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" data-toggle="modal" data-target="#addActiv"><i class="fa fa-plus"></i> Agregar Actividad</a><a class="btn btn-default pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" href="/print?c={{$request->get('c')}}"><i class="fa fa-print"></i> Imprimir Tabla</a></p>
-				<?php } ?>
-				@else
-				<?php if($sesion['u_rango']==3||$sesion['u_rango']==8||$sesion['u_rango']==7){?>
-					<p><a class="btn btn-default pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" href="/print?c={{$request->get('c')}}"><i class="fa fa-print"></i> Imprimir Tabla</a></p>
+					<p><a class="btn btn-primary pull-right" style="margin-top:-50px; margin-bottom:40px; margin-right:10px;" data-toggle="modal" data-target="#addActiv"><i class="fa fa-plus"></i> Agregar Actividad</a></p>
 				<?php } ?>
 				@endif
 
@@ -70,7 +61,7 @@ $sesion =$_SESSION["loggedIn"];
                                         	@if(!$request->get('c'))
                                             <th>Colegio</th>
                                             @endif
-                                            <th>Fecha</th>
+                                            <th data-selected>Fecha</th>
                                             <th>Motivo</th>
                                             <th>Observacion</th>
                                             <th>Usuario</th>
@@ -85,7 +76,7 @@ $sesion =$_SESSION["loggedIn"];
                                         	@if(!$request->get('c'))
 							            	<td>{{$activity->colegio->col_nombre}}</td>
                                             @endif
-							            	<td>{{date('d/m/Y',strtotime($activity->sc_fecha))}}</td>
+							            	<td data-order="{{date('Ymd',strtotime($activity->sc_fecha))}}">{{date('d/m/Y',strtotime($activity->sc_fecha))}}</td>
 							            	<td><b>{{$activity->sc_motivo}}</b></td>
 							            	<td><b>{{$activity->sc_observacion}}</b></td>
 							            	<td>{{$activity->usuario->u_nombres}} {{$activity->usuario->u_apellidos}}</td>
@@ -154,15 +145,41 @@ $sesion =$_SESSION["loggedIn"];
 @section("scripts")
 <script>
 	$(document).ready(function(){
-		$('#mainTable').DataTable({
-	        "language": {
-	            "lengthMenu": "_MENU_ resultados por Pagina",
-	            "zeroRecords": "No hay resultados",
-	            "info": "_PAGE_ de _PAGES_",
-	            "infoEmpty": "No hay registros",
-	            "infoFiltered": ""
-	        }
-	    });
+    	var table = $("#mainTable").DataTable({
+			"language": {
+			    "sProcessing":     "Procesando...",
+			    "sLengthMenu":     "_MENU_",
+			    "sZeroRecords":    "No se encontraron resultados",
+			    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+			    "sInfo":           "Mostrando del _START_ al _END_ de un total de _TOTAL_ filas",
+			    "sInfoEmpty":      "Mostrando del 0 al 0 de un total de 0 filas",
+			    "sInfoFiltered":   "(filtrado de _MAX_ registros)",
+			    "sInfoPostFix":    "",
+			    "sSearch":         "",
+			    "sUrl":            "",
+			    "sInfoThousands":  ",",
+			    "sLoadingRecords": "Cargando...",
+			    "oPaginate": {
+			        "sFirst":    "Primero",
+			        "sLast":     "Último",
+			        "sNext":     "Siguiente",
+			        "sPrevious": "Anterior"
+			    },
+			    "oAria": {
+			        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+			        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+			    }
+			},
+    		"order": [[ 1, "desc" ]],
+    		"lengthMenu": [[20, 35, 50, -1], [20, 35, 50, "Todo"]],
+    		buttons: ['pdf']
+    	});
+
+		table.buttons().container()
+		    .appendTo( $('.col-sm-6:eq(0)', table.table().container() ) );
+
+    	$("#searchTable").attr('placeholder','Buscar...');
+
 		$("#newAct").submit(function() {
 		    $.ajax({
 		           type: "POST",
