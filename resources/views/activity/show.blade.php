@@ -83,9 +83,8 @@ $sesion =$_SESSION["loggedIn"];
                                         	@if($request->get('c'))
                                             <td>
                                             	<a 
-                                            	class="btn btn-danger"
+                                            	class="btn btn-danger removeItem"
                                             	href="#"
-                                            	id="removeItem"
                                             	data-id="{{$activity->sc_id}}"
                                             	>
                                             		<i class="fa fa-times"></i>
@@ -205,7 +204,7 @@ $sesion =$_SESSION["loggedIn"];
 		    });
 		    return false;
 		});
-		$("#removeItem").click(function(){
+		$(".removeItem").click(function(){
 			var id = $(this).data('id');
 			swal({
 			  title: "¿Deseas eliminar esta Actividad?",
