@@ -25,16 +25,16 @@ $sesion =$_SESSION["loggedIn"];
 				@if($colegio)
 				<ul class="nav nav-tabs">
 					<li>
-						<a href="panel/institucion.php?type=info&amp;id=4368953&amp;tab=1">Información Básica</a>
+						<a href="panel/institucion.php?type=info&amp;id={{$colegio[0]->col_id}}&amp;tab=1">Información Básica</a>
 					</li>
 					<li>
-						<a href="panel/institucion.php?type=info&amp;id=4368953&amp;tab=2&amp;view=1">Institución</a>
+						<a href="panel/institucion.php?type=info&amp;id={{$colegio[0]->col_id}}&amp;tab=2&amp;view=1">Institución</a>
 					</li>
 					<li>
-						<a href="panel/institucion.php?type=info&amp;id=4368953&amp;tab=3">Pagos</a>
+						<a href="panel/institucion.php?type=info&amp;id={{$colegio[0]->col_id}}&amp;tab=3">Pagos</a>
 					</li>
 					<li>
-						<a href="panel/institucion.php?type=info&amp;id=4368953&amp;tab=4">Notificar Captura</a>
+						<a href="panel/institucion.php?type=info&amp;id={{$colegio[0]->col_id}}&amp;tab=4">Notificar Captura</a>
 					</li>
 					<li class="active"><a>Seguimiento</a></li>
 				</ul>
