@@ -1,9 +1,6 @@
 <?php 
 session_start();
 date_default_timezone_set("America/Mexico_City"); 
-if(isset($_SESSION['loggedIn'])){
-    header("Location: panel/dashboard.php");    
-}
 ?>
 <!DOCTYPE html>
     <!--[if IE 9 ]><html class="ie9"><![endif]-->
@@ -26,10 +23,6 @@ if(isset($_SESSION['loggedIn'])){
         <link href="//www.cosmos.ink/extra/css/app.min.1.css" rel="stylesheet">
         <link href="//www.cosmos.ink/extra/css/app.min.2.css" rel="stylesheet">
         <style>
-        @font-face{
-            font-family: Gidole;
-            src: url(/fonts/Gidole-Regular.otf);    
-        }
         body:before{
             height:100% !important; 
         }
@@ -59,7 +52,8 @@ if(isset($_SESSION['loggedIn'])){
             opacity:0.3;
         }
         body{
-            background: #00B5DD;    
+            background: #00B5DD;
+            font-family:"Helvetica Neue", "Segoe UI", "Roboto", Helvetica, sans-serif;    
         }
         .fa-btn{
             padding-top:8px !important;
@@ -106,11 +100,8 @@ if(isset($_SESSION['loggedIn'])){
                 
             </form>
         </div>
-            <div id="branding" style="bottom:30px;left: 0px;position: absolute; display:block !important;color: rgba(0,0,0, 0.58); opacity: 1;">
-                            <img style="min-width: 35px; width:7%;" src="//www.cosmos.ink/extra/img/c_icon.png">
-            </div>
-            <div id="branding" style="bottom:29px;right: 20px;position: absolute; display:block !important;color: rgba(0,0,0, 0.58); opacity: 0.5;"><img src="https://thera.tech/images/logo.png" width="85px"> <b style="color:#FFF;"></b></div>
-            <div id="branding" style="bottom:20px;right: 115px;position: absolute; text-align: right; display:block !important;color: rgba(255,255,255, 0.58);"><a class="btn btn-link" target="new" href="https://www.thera.tech/support">Estado del Sistema</a><a class="btn btn-link" href="https://www.mydehan.com/privacy.pdf" target="new">Aviso de Privacidad</a></div>
+            <div id="branding" style="bottom:29px;left: 20px;position: absolute; display:block !important;color: rgba(0,0,0, 0.58); opacity: 0.5;"><img src="http://www.thera.tech/wp-content/uploads/2017/04/logo-white.png" width="85px"> <b style="color:#FFF;"></b></div>
+            <div id="branding" style="bottom:20px;right: 20px;position: absolute; text-align: right; display:block !important;color: rgba(255,255,255, 0.58);"><a class="btn btn-link" href="https://www.mydehan.com/privacy.pdf" target="new">Aviso de Privacidad</a></div>
         
         <!-- Older IE warning message -->
         <!--[if IE]>
