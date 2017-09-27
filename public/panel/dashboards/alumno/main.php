@@ -1,3 +1,12 @@
+<div class="blue-block">
+	<div class="page-title">
+		<h3 class="pull-left"><i class="fa fa-building"></i> Inicio <span style="letter-spacing:0px;"> Vista General</span></h3> 	
+		<div class="breads pull-right">
+			<a href="dashboard.php">Mi Avance</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
 				<div class="blue-block" style="border-left:solid 1px #CCC;">
 				
 					<div class="row">

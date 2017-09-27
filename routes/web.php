@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('login');
 });
 
+Route::get('me', 'AlumnoController@index');
+
 Route::resource('activity', 'ActivityController');
 Route::get('/print','ActivityController@print');
 Auth::routes();
