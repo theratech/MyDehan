@@ -13,11 +13,7 @@ include("inc/head.php");
 	}
 	// Dashboard Alumno Dehan
 	if ($sesion['u_rango']==1&&$sesion['u_activo']==1){
-		?>
-		<script type="text/javascript">
-			window.location.replace("/me");
-		</script>
-		<?php
+		include("dashboards/alumno/dehan.php");
 	}
 ## PROFESORES
 	// Dashboard Maestro Plus
