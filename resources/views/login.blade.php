@@ -13,15 +13,15 @@ date_default_timezone_set("America/Mexico_City");
         
         <!-- Vendor CSS -->
         <link href="/fonts/font-awesome/css/font-awesome.min.css?v=1" rel="stylesheet">
-        <link href="//www.cosmos.ink/extra/vendors/animate-css/animate.min.css" rel="stylesheet">
-        <link href="//www.cosmos.ink/extra/vendors/loaders/spinKit.css" rel="stylesheet">
-        <link href="//www.cosmos.ink/extra/vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
-        <link href="//www.cosmos.ink/extra/vendors/material-icons/material-design-iconic-font.min.css" rel="stylesheet">
-        <link href="//www.cosmos.ink/extra/vendors/socicon/socicon.min.css" rel="stylesheet">
+        <link href="/css/cosmos/extra/vendors/animate-css/animate.min.css" rel="stylesheet">
+        <link href="/css/cosmos/extra/vendors/loaders/spinKit.css" rel="stylesheet">
+        <link href="/css/cosmos/extra/vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+        <link href="/css/cosmos/extra/vendors/material-icons/material-design-iconic-font.min.css" rel="stylesheet">
+        <link href="/css/cosmos/extra/vendors/socicon/socicon.min.css" rel="stylesheet">
             
         <!-- CSS -->
-        <link href="//www.cosmos.ink/extra/css/app.min.1.css" rel="stylesheet">
-        <link href="//www.cosmos.ink/extra/css/app.min.2.css" rel="stylesheet">
+        <link href="/css/cosmos/extra/css/app.min.1.css" rel="stylesheet">
+        <link href="/css/cosmos/extra/css/app.min.2.css" rel="stylesheet">
         <style>
         body:before{
             height:100% !important; 
@@ -133,13 +133,13 @@ date_default_timezone_set("America/Mexico_City");
         <![endif]-->
         
         <!-- Javascript Libraries -->
-        <script src="//www.cosmos.ink/extra/js/jquery-2.1.1.min.js"></script>
-        <script src="//www.cosmos.ink/extra/js/bootstrap.min.js"></script>
-        <script src="//www.cosmos.ink/extra/vendors/sweet-alert/sweet-alert.min.js"></script>
+        <script src="/css/cosmos/extra/js/jquery-2.1.1.min.js"></script>
+        <script src="/css/cosmos/extra/js/bootstrap.min.js"></script>
+        <script src="/css/cosmos/extra/vendors/sweet-alert/sweet-alert.min.js"></script>
         
-        <script src="//www.cosmos.ink/extra/vendors/waves/waves.min.js"></script>
+        <script src="/css/cosmos/extra/vendors/waves/waves.min.js"></script>
         
-        <script src="//www.cosmos.ink/extra/js/functions.js"></script>
+        <script src="/css/cosmos/extra/js/functions.js"></script>
     <script>
         $(document).ready(function(e) {
             $("#loginForm").submit(function(ev){

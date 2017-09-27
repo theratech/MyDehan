@@ -55,7 +55,7 @@ overflow-x: hidden;
 	border-left: solid 0.1em rgba(204, 204, 204, 0.73);	
 }
 .nav > li{
-	font-family:Helvetica Neue, Segoe UI, Roboto, Helvetica, Sans-serif, Arial;
+	font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 	font-weight:500;	
 }
 /* Basic CSS starts */
@@ -143,7 +143,7 @@ overflow-x: hidden;
 
 body{
    background:#EAEAEA;
-   font-family:"Helvetica Neue", "Segoe UI", "Roboto", Helvetica, sans-serif;
+   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
    font-weight:400;
    font-size:13px;
    line-height:23px;
@@ -152,9 +152,9 @@ body{
 }
 
 h1,h2,h3,h4,h5,h6{
-   font-family:"Helvetica Neue", "Segoe UI", "Roboto", Helvetica, sans-serif;
+   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
    letter-spacing:-1px;
-   font-weight:100;
+   font-weight:300;
    margin:0px;
    padding:0px;
    color:#777;

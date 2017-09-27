@@ -1,0 +1,30 @@
+/**
+ * ContextJS Styles
+ * For use with Twitters Bootstrap CSS
+ */
+
+.dropdown-context .nav-header{
+	cursor:default;
+	}
+
+.dropdown-context .dropdown-submenu:hover .dropdown-menu {
+	display: none;
+	}
+
+.dropdown-context .dropdown-submenu:hover > .dropdown-menu {
+ 	display: block;
+	}
+	
+
+.compressed-context a{
+	padding-left: 14px;
+	padding-top: 0;
+	padding-bottom: 0;
+	font-size: 13px;
+	}
+.compressed-context .divider{
+	margin: 5px 1px;
+	}
+.compressed-context .nav-header{
+	padding:1px 13px;
+	}
