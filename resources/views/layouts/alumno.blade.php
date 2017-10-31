@@ -55,6 +55,39 @@ $res = mysqli_query($D,$query);
             font-size: 12px;
             text-align: center;
         }
+        .blue-knob-block{   
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+        .blue-knob-block:hover{   
+            -webkit-transform:scale(1.05) !important;
+            -moz-transform:scale(1.05) !important;
+            transform:scale(1.05) !important;
+            opacity: 1 !important;
+        }
+        .rec{
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+        .rec:hover{
+            -webkit-transform:scale(1.05) !important;
+            -moz-transform:scale(1.05) !important;
+            transform:scale(1.05) !important;
+            background: #fff;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.1);
+        }
+        .rec>img{
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+        .rec:hover>img{
+            -webkit-transform:scale(1.3) !important;
+            -moz-transform:scale(1.3) !important;
+            transform:scale(1.3) !important;
+        }
 .activate{
     transition: color .2s;  
 }
