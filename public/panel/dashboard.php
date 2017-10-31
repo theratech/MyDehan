@@ -5,11 +5,19 @@ include("inc/head.php");
 ## ALUMNOS
 	// Dashboard Alumno Plus
 	if ($sesion['u_rango']==1&&$sesion['u_activo']==2&&$_GET['mode']!='dehan'){
-		include("dashboards/alumno/plus.php");
+		?>
+		<script type="text/javascript">
+			window.location.replace("/me");
+		</script>
+		<?php
 	}
 	// Dashboard Alumno Plus->Dehan
 	if ($_GET['mode']=='dehan'){
-		include("dashboards/alumno/dehan.php");
+		?>
+		<script type="text/javascript">
+			window.location.replace("/me");
+		</script>
+		<?php
 	}
 	// Dashboard Alumno Dehan
 	if ($sesion['u_rango']==1&&$sesion['u_activo']==1){
