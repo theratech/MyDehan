@@ -88,6 +88,9 @@ $res = mysqli_query($D,$query);
             -moz-transform:scale(1.3) !important;
             transform:scale(1.3) !important;
         }
+        .blue-knob-block:hover>ul>p>a.btn {
+            transform: scale(1.2);
+        }
 .activate{
     transition: color .2s;  
 }
