@@ -1,4 +1,4 @@
-<?php session_start();
+<?php
 date_default_timezone_set ('america/mexico_city');
 
 error_reporting(0);
@@ -128,7 +128,7 @@ $res = mysqli_query($D,$query);
                                         $aludata = $_SESSION['aldata'];
                                         /*print_r($aludata);*/?>
                                         <div class="col-md-12 col-sm-12 col-xs-12" style="padding-left:70px;">
-                                            <h5 style="margin-top:10px;"><a href="index.html#" style="color:#000;"><?php echo $my_nombre;?> <?php echo $my_apellido;?></a></h5>
+                                            <h5 style="margin-top:10px;"><a href="index.html#" style="color:#000;"></h5>
                                             <p><?php echo $my_rango;?></p>
                                             <?php if($my_rango == "Alumno"){
                                                 $q_getit = mysqli_query($D,"SELECT * FROM grupos g INNER JOIN niveles_escolares ne INNER JOIN colegios_niveles cn INNER JOIN colegios c ON g.g_nivel = cn.cn_id AND ne.ne_id = cn.cn_nivel AND g.g_colegio = c.col_id WHERE g.g_id = '".$aludata['ad_grupo']."'");
@@ -253,64 +253,6 @@ $res = mysqli_query($D,$query);
     <script type="text/javascript" src="/panel/js/bootstrap-datetimepicker.min.js"></script>
       <!-- Sparkline for Mini charts -->
       <script src="/panel/js/sparkline.js"></script>
-      <!-- jQuery UI -->
-      <script src="/panel/js/morris.js"></script>
-      <?php if($_GET['type']=="userview"){
-         ?>
-         <script>
-new Morris.Line({
-  // ID of the element in which to draw the chart.
-  element: 'aludata',
-  // Chart data records -- each entry in this array corresponds to a point on
-  // the chart.
-  data: [<?php 
-    $nivel=mysqli_query($D,"SELECT n_id,al_fecha FROM alumnos_libros a inner join libros l inner join niveles n ON a.al_libro_actual = l.l_id AND a.al_alumno = '".$_GET['id']."' AND l.l_nivel = n.n_id");
-      $cueri = array();
-      $check_num_rows=mysqli_num_rows($nivel);
-       while ($celda = mysqli_fetch_array($nivel,MYSQLI_ASSOC))
-     {
-           $cueri[]=$celda;
-           
-         
-      } foreach($cueri as $valor){
-              $dato1 = $valor;
-              $dato11 = $dato1['n_id'];
-              $dato12 = $dato1['al_fecha'];
-              $fechadatos = explode('-', $dato12);
-              $mes = $fechadatos['1']-1;
-              $meses[] = $mes;
-              $datos[] = $dato11;
-              
-              $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
-$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
- 
-            $monthName = $meses[$mes];
-              if($valor==end($cueri)){$final ="";}else{$final =",";}
-              if($fechadatos['2']!= date('Y')){}else{
-                echo "{mes:'".$monthName."',value: ".$dato11."}".$final;
-              }
-           }
-    
-    ?>],
-  // The name of the data record attribute that contains x-values.
-  xkey: 'mes',
-  parseTime: false,
-  lineColors: ['#F00'],
-  grid: false,
-  xLabels: 'month',
-  gridTextColor: ['#F00'],
-  // A list of names of data record attributes that contain y-values.
-  ykeys: ['value'],
-  // Labels for the ykeys -- will be displayed when you hover over the
-  // chart.
-  labels: ['Nivel'],
-  gridIntegers: true,
-  ymin: 0,
-});
-</script>
-         <?php 
-      }?>
-      <!-- jQuery Knob -->
 
       <!-- jQuery Data Tables -->
       <script src="/panel/js/jquery.dataTables.min.js"></script>
@@ -326,6 +268,8 @@ $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"
       <script src="/panel/js/html5shiv.js"></script>
       <script src="/panel/js/chart.js"></script>
       <script src="/panel/js/require.js"></script>
+      <!-- jQuery UI -->
+      <script src="/panel/js/morris.js"></script>
 
       <!-- Javascript for this page -->
       
