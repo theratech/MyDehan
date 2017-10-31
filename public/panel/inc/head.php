@@ -10,6 +10,21 @@ if(!$_SESSION["loggedIn"]){
 	$sesion = $_SESSION["loggedIn"];	
 }
 
+if ($sesion['u_rango']==1){
+	Header("Location: /me");
+}
+if ($sesion['u_rango']==1&&$sesion['u_activo']==2&&$_GET['mode']!='dehan'){
+	Header("Location: /me");
+}
+// Dashboard Alumno Plus->Dehan
+if ($_GET['mode']=='dehan'){
+	Header("Location: /me");
+}
+// Dashboard Alumno Dehan
+if ($sesion['u_rango']==1&&$sesion['u_activo']==1){
+	Header("Location: /me");
+}
+
 $query = "SELECT u.*,r.* FROM usuarios u inner join rangos r ON u.u_id = '".$sesion['u_id']."' AND u.u_rango = r.r_id";
 $res = mysqli_query($D,$query);
 									

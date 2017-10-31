@@ -2,42 +2,6 @@
 $TPAG = "Inicio";
 include("inc/head.php");
 
-## ALUMNOS
-	// Dashboard Alumno Plus
-	if ($sesion['u_rango']==1){
-		?>
-		<meta http-equiv="refresh" content="0; url=https://www.mydehan.com/me" />
-		<script type="text/javascript">
-			window.location.replace("/me");
-		</script>
-		<?php
-	}
-	if ($sesion['u_rango']==1&&$sesion['u_activo']==2&&$_GET['mode']!='dehan'){
-		?>
-		<meta http-equiv="refresh" content="0; url=https://www.mydehan.com/me" />
-		<script type="text/javascript">
-			window.location.replace("/me");
-		</script>
-		<?php
-	}
-	// Dashboard Alumno Plus->Dehan
-	if ($_GET['mode']=='dehan'){
-		?>
-		<meta http-equiv="refresh" content="0; url=https://www.mydehan.com/me" />
-		<script type="text/javascript">
-			window.location.replace("/me");
-		</script>
-		<?php
-	}
-	// Dashboard Alumno Dehan
-	if ($sesion['u_rango']==1&&$sesion['u_activo']==1){
-		?>
-		<meta http-equiv="refresh" content="0; url=https://www.mydehan.com/me" />
-		<script type="text/javascript">
-			window.location.replace("/me");
-		</script>
-		<?php
-	}
 ## PROFESORES
 	// Dashboard Maestro Plus
 	if ($sesion['u_rango']==2&&$sesion['u_activo']==2){
