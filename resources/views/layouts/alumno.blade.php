@@ -48,7 +48,7 @@ $res = mysqli_query($D,$query);
             border-radius: 2px !important;
             padding: 6px;
             color: #FFF !important;
-            
+            position:absolute !important;
             background: rgba(85, 233, 139, 0.79)!important ;
             border: solid 2px rgba(230, 230, 230, 0) !important;
             font-family: sans-serif;
