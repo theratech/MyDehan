@@ -20,7 +20,7 @@
 				<div id="avance" style="height:400px;"></div>
 			</div>
 			<div class="col-md-4">
-				<div class="blue-knob-block" style="margin-top:7px; padding:10px 20px; background: #FFF; border-radius:0; transform: scale(1.1)">
+				<div class="blue-knob-block" style="margin-top:7px; padding:10px 20px; background: #FFF; border-radius:0; transform: scale(1.02); opacity: 0.95;">
                 	<h3 style="margin-top:0px; padding-top:7px; font-weight:400; text-align: center;">Nivel {{$nivelActual->n_nombre}}</h3>
                 	<br/>
 					<ul class="list-inline list-unstyled">
@@ -34,7 +34,7 @@
 						</p>
 					</ul>
 				</div>
-				<div class="blue-knob-block" style="margin-top:20px; padding:10px 20px; background: #FFF; border-radius:0; filter: opacity(0.8);">
+				<div class="blue-knob-block" style="margin-top:20px; padding:10px 20px; background: #FFF; border-radius:0; opacity: 0.8;">
                 	<h3 style="margin-top:0px; padding-top:7px; font-weight:400; text-align: center;">Nivel {{$nivelSiguiente->n_nombre}}</h3>
                 	<br/>
 					<ul class="list-inline list-unstyled">
@@ -65,7 +65,7 @@
 		</p>
 		<br/>
 		@foreach($reconocimientos as $rec)
-			<div style="width: 10%; padding: 10px; margin-left:auto; margin-right: auto; display: inline-table;">
+			<div class="rec" style="width: 10%; padding: 10px; margin-left:auto; margin-right: auto; display: inline-table;">
 				<img src="{{ $rec->r_img }}" width="100%"/>
 				<br/><br/>
 				<strong>{{ $rec->r_mes." ".$rec->r_ano }}</strong>
