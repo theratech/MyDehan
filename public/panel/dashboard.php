@@ -4,6 +4,13 @@ include("inc/head.php");
 
 ## ALUMNOS
 	// Dashboard Alumno Plus
+	if ($sesion['u_rango']==1){
+		?>
+		<script type="text/javascript">
+			window.location.replace("/me");
+		</script>
+		<?php
+	}
 	if ($sesion['u_rango']==1&&$sesion['u_activo']==2&&$_GET['mode']!='dehan'){
 		?>
 		<script type="text/javascript">
