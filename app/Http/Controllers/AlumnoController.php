@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Usuario;
+use App\Nivel;
+use App\Reconocimiento;
+
+session_start();
 
 class AlumnoController extends Controller
 {
@@ -13,7 +18,34 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return view('alumno/default/index');
+        $sesion = $_SESSION["loggedIn"]; 
+
+        $currentUser = Usuario::where('u_id',$sesion['u_id'])->first();
+        $currentBook = $currentUser->libros->last()->info;
+        $currentLevel = $currentBook->nivel;
+
+        $colegio = $currentUser->connect();
+
+        $grafica = "";
+
+        $meses = ["01" => "Enero","02"=>"Febrero", "03"=>"Marzo", "04"=>"Abril", "05"=>"Mayo", "06"=>"Junio", "07"=>"Julio", "08"=>"Agosto", "09"=>"Septiembre", "10"=>"Octubre", "11"=>"Noviembre", "12"=>"Diciembre"];
+
+        foreach($currentUser->libros as $lbd){
+            $grafica .= "{ month:'".$meses[date('m',strtotime($lbd->al_fecha))].date(' Y',strtotime($lbd->al_fecha))."', value: ".$lbd->info->l_graph." },";
+        }
+
+        $data = [
+            'datos' => $grafica,
+            'user' => $currentUser,
+            'colegio' => $colegio,
+            'libroActual' => $currentBook,
+            'nivelActual' => $currentLevel,
+            'reconocimientos' => Reconocimiento::where('r_usuario',$currentUser->u_id)->get(),
+            'nivelSiguiente' => Nivel::where('n_id',$currentLevel->n_id+1)->first(),
+            'var' => "hola"
+        ];
+
+        return view('alumno/default/index',$data);
     }
 
     /**
