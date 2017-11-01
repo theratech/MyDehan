@@ -54,14 +54,15 @@
 		</div>
 	</div>
 </div>
+
+@if(!count($reconocimientos)==0)
 <div class="container">
 	<div class="row" style="background:#EEE;margin: 0 -30px;padding: 50px 20px; text-align: center">
-		@if(!count($reconocimientos)==0)
 		<h4>
 			<b>FELICIDADES</b>
 		</h4>
 		<p>
-			Has logrado completar las siguientes medallas
+			Has logrado completar los siguientes niveles
 		</p>
 		<br/>
 		@foreach($reconocimientos as $rec)
@@ -70,17 +71,10 @@
 				<br/><br/>
 				<strong>{{ $rec->r_mes." ".$rec->r_ano }}</strong>
 			</div>
-		@endforeach
-		@else
-			<h4>
-				<b>¡UY!</b>
-			</h4>
-			<p>
-				Todavía no tienes ninguna medalla.
-			</p>
-		@endif
 	</div>
 </div>
+@endif
+
 @endsection
 @section("scripts")
 <script type="text/javascript">
