@@ -71,6 +71,7 @@
 				<br/><br/>
 				<strong>{{ $rec->r_mes." ".$rec->r_ano }}</strong>
 			</div>
+		@endforeach
 	</div>
 </div>
 @endif
