@@ -105,7 +105,7 @@ new Morris.Line({
   // chart.
   labels: ['Libro'],
   gridIntegers: true,
-  ymin: '1'
+  ymin: '{{ $menor }}'
 });
 </script>
 @endsection
