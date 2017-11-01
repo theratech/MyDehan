@@ -30,7 +30,11 @@ class AlumnoController extends Controller
 
         $meses = ["01" => "Enero","02"=>"Febrero", "03"=>"Marzo", "04"=>"Abril", "05"=>"Mayo", "06"=>"Junio", "07"=>"Julio", "08"=>"Agosto", "09"=>"Septiembre", "10"=>"Octubre", "11"=>"Noviembre", "12"=>"Diciembre"];
 
+        $menor = 99;
         foreach($currentUser->libros as $lbd){
+            if($menor>$lbd->info->l_graph){
+                $menor = $lbd->info->l_graph;
+            }
             $grafica .= "{ month:'".$meses[date('m',strtotime($lbd->al_fecha))].date(' Y',strtotime($lbd->al_fecha))."', value: ".$lbd->info->l_graph." },";
         }
 
@@ -42,6 +46,7 @@ class AlumnoController extends Controller
             'nivelActual' => $currentLevel,
             'reconocimientos' => Reconocimiento::where('r_usuario',$currentUser->u_id)->get(),
             'nivelSiguiente' => Nivel::where('n_id',$currentLevel->n_id+1)->first(),
+            'menor' => floor($menor),
             'var' => "hola"
         ];
 
