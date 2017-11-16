@@ -45,10 +45,10 @@ date_default_timezone_set("America/Mexico_City");
             background: url(https://www.dehanmatematicas.com/wp-content/uploads/2017/11/dehanport.jpg) no-repeat center center !important;
             background-size: cover !important;
             transform: scale(1.05);
-            opacity: 1;
+            opacity: 0.65;
         }
         body{
-            background: transparent;
+            background: #000;
             font-family:-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, 'Helvetica', 'Arial', sans-serif, 'Helvetica', 'Arial', sans-serif;    
         }
         .fa-btn{
