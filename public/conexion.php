@@ -1,6 +1,6 @@
 
 <?php
-define('DB_SERVER', 'database.dns.mydehan.com');
+define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'dehan');
 define('DB_PASSWORD', '2Bp6SMuqDjZdKD5T');
 
