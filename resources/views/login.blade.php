@@ -41,19 +41,15 @@ date_default_timezone_set("America/Mexico_City");
         .input-group-addon{
             vertical-align: middle !important;
         }
-        body:before{
-            background:url(/site/img/message-bg.jpg) no-repeat center center !important;
-            background-size:cover !important;
+        body:before {
+            background: url(https://www.dehanmatematicas.com/wp-content/uploads/2017/11/dehanport.jpg) no-repeat center center !important;
+            background-size: cover !important;
             transform: scale(1.05);
-            -webkit-transform:scal(1.3);
-            filter:blur(20px);
-            -webkit-filter:blur(20px);
-            box-shadow:none !important;
-            opacity:0.3;
+            opacity: 1;
         }
         body{
-            background: #00B5DD;
-            font-family:"Helvetica Neue", "Segoe UI", "Roboto", Helvetica, sans-serif;    
+            background: transparent;
+            font-family:-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, 'Helvetica', 'Arial', sans-serif, 'Helvetica', 'Arial', sans-serif;    
         }
         .fa-btn{
             padding-top:8px !important;
