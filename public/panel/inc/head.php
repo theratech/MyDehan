@@ -80,7 +80,7 @@ $res = mysqli_query($D,$query);
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="http://www.cosmos.ink/extra/vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
+		<link href="/vendors/sweet-alert/sweet-alert.min.css" rel="stylesheet">
 		
 		<!-- Styles -->
 		<!-- Bootstrap CSS -->
@@ -109,7 +109,7 @@ $res = mysqli_query($D,$query);
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="index.html#">
 	  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-      <script src="http://www.cosmos.ink/extra/vendors/sweet-alert/sweet-alert.min.js"></script>
+      <script src="/vendors/sweet-alert/sweet-alert.min.js"></script>
 	</head>
 	
 	<body>
