@@ -124,7 +124,7 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
   	// Preescolar
   	if($gr_n_id == 1){
   		?>
-	  	<select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" name="q_nivel" class="form-control forma1" id="nivell<?php echo $gr_id; ?>">
+	  	<select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" name="q_nivel" data-value="<?php echo $nivel['l_nivel']; ?>" class="form-control forma1 levelselector" id="nivell<?php echo $gr_id; ?>">
 	  	<?php
 	  	$nquery = mysqli_query($D,"SELECT * FROM niveles ORDER BY n_id ASC"); 
 	  	$nnunivel = mysqli_num_rows($nquery); 
@@ -167,7 +167,7 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
 	// Primaria
   	if($gr_n_id == 2){
 	  ?>
-	  	<select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" name="q_nivel" class="form-control forma1" id="nivell<?php echo $gr_id; ?>">
+	  	<select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" name="q_nivel" data-value="<?php echo $nivel['l_nivel']; ?>" class="form-control forma1 levelselector" id="nivell<?php echo $gr_id; ?>">
 	  <?php 
 	  	$nquery = mysqli_query($D,"SELECT * FROM niveles ORDER BY n_id ASC"); 
 	  	$nnunivel = mysqli_num_rows($nquery); 
@@ -208,7 +208,7 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
   	if($gr_n_id >= 3){
 	  ?>
 
-	  	<select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" name="q_nivel" class="form-control forma1" id="nivell<?php echo $gr_id; ?>">
+	  	<select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" name="q_nivel" data-value="<?php echo $nivel['l_nivel']; ?>" class="form-control forma1 levelselector" id="nivell<?php echo $gr_id; ?>">
 
 	  <?php
 	  	$nquery = mysqli_query($D,"SELECT * FROM niveles ORDER BY n_id ASC"); 
@@ -250,7 +250,7 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
 
   <!-- Selector de Libros !-->
 
-  <select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" class="form-control forma1" id="libroboxm<?php echo $gr_id; ?>" name="q_libro">
+  <select style="width:49%; margin-top:5px; display:inline-block; margin-top:-5px;" class="form-control forma1 bookselector" data-value="<?php echo $nivel['l_nombre'];?>" id="libroboxm<?php echo $gr_id; ?>" name="q_libro">
 
   <?php
   	$bquery = mysqli_query($D,"SELECT * FROM libros WHERE l_nivel = '1' ORDER BY l_id ASC");
@@ -339,7 +339,7 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
                                                     <td>
                                                     </td>
                                                     <td>
-                                              <a class="sendall btn btn-success pull-right" href="#">Guardar Todo</a>
+                                              <a class="sendall btn btn-success pull-right disabled" href="#">Guardar Todo</a>
                                               </td>
                                               	</tr>
                                               </tbody>
@@ -712,17 +712,21 @@ $("#adduseral").submit(function() {
 });
 $('.sendall').click(function(){
     $('.senddata').each(function(){
-		$(".sendall").addClass("disabled");
-		$.ajax({
-           type: "POST",
-           url: "query.php?func=updatelevel",
-           data: $(this).serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-			   swal('Listo','Datos Guardados','success');
-			   location.reload();
-           }
-         });
+    	if($(this).children('.levelselector').value() == $(this).children('.levelselector').data('value') && $(this).children('.bookselector').value() == $(this).children('.bookselector').data('value')){
+    		swal('Son los mismos datos para este alumno');
+    	}else{
+			$(".sendall").addClass("disabled");
+			$.ajax({
+	           type: "POST",
+	           url: "query.php?func=updatelevel",
+	           data: $(this).serialize(), // serializes the form's elements.
+	           success: function(data)
+	           {
+				   swal('Listo','Datos Guardados','success');
+				   location.reload();
+	           }
+	         });
+    	}
     });
 		
 });
