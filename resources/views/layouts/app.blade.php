@@ -93,7 +93,7 @@ $res = mysqli_query($D,$query);
             
         <!-- Favicon -->
         <link rel="shortcut icon" href="index.html#">
-      <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+      <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
     </head>
     
     <body>

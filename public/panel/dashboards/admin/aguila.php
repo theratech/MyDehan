@@ -9,7 +9,7 @@
 				
 				
 				<!-- Black block starts -->
-				<div class="blue-block" style="border-left:solid 1px #CCC; height:700px;">
+				<div class="blue-block" style="border-left:solid 1px #CCC; height:100vh;">
 				
 										
 					<div class="row">
