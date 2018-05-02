@@ -81,7 +81,7 @@ $res = mysqli_query($D,$query);
                                                   <th>Nombre</th>
                                                   <th width="200px">Ultimo Libro</th>
                                                   <th width="300px">Nuevo Libro</th>
-                                                  <?php if($sesion['u_rango']==3||$sesion['u_rango']==7||$sesion['u_rango']==8){?><th>Avance</th><?php }?>
+                                                  <?php if($sesion['u_rango']==3||$sesion['u_rango']==7||$sesion['u_rango']==8){?><th width="10px">Avance</th><?php }?>
                                                 </tr>
                                               </thead>
                                               <tbody>
