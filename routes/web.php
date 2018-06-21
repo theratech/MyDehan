@@ -18,5 +18,6 @@ Route::get('/', function () {
 Route::get('me', 'AlumnoController@index');
 
 Route::resource('activity', 'ActivityController');
+Route::get('excuse/create', 'ExcuseController@store');
 Route::get('/print','ActivityController@print');
 Auth::routes();
