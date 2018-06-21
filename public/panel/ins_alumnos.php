@@ -798,154 +798,7 @@ setInterval(function(){
 
 <?php if($_GET['type']=="grupoview"&&$_GET['id']){?>
 
-<script>
-var addexcuse = function(){
-	$('#submitExcuse').click(function(){
-		$.ajax({
-		   type: "GET",
-		   url: "/excuse/create",
-		   data: {
-		   		user_id: $('#excuseduser').val(),
-		   		excuse: $('#excusevalue').val(),
-		   		description: $('.input-hidden').val()
-		   }, 
-		   beforeSend: function()
-		   {
-		   		swal({
-		   			text: 'Procesando'
-		   		});
-		   		$('#notifystop').modal('hide');
-		   },
-		   error: function(data)
-		   {
-		   		$('.senddata[data-id="'+$('#excuseduser').val()+'"]').attr('data-excuse',0);
 
-		   		swal({
-		   			text: 'Ocurrió un problema',
-		   			type: 'error'
-		   		});
-		   },
-		   success: function(data)
-		   {
-		   		$('.senddata[data-id="'+$('#excuseduser').val()+'"]').attr('data-excuse',1);
-		   		if($('.senddata[data-id="'+$('#excuseduser').val()+'"]').data('excuse') === 1){
-			   		$('.excuse-modal[data-id="'+$('#excuseduser').val()+'"]').addClass('checkedstatus');
-
-		    		if($('#librobox'+$('#excuseduser').val()).next().data('type') != 'checkedstatus'){
-	    				$('#librobox'+$('#excuseduser').val()).next('.excuse-modal').removeClass('show');
-						$('#librobox'+$('#excuseduser').val()).after('<a class="excuse-modal show checkedstatus" data-id="'+$('#excuseduser').val()+'"><i class="fa fa-check"></i></a>');
-						completos += 1;
-		    		}else{
-	    				$('#librobox'+$('#excuseduser').val()).next('.excuse-modal').removeClass('show');
-		    			$('#librobox'+$('#excuseduser').val()).next('.excuse-modal.checkedstatus').addClass('show');
-						completos += 1;
-		    		}
-			   		swal({
-			   			text: '¡Hecho!',
-			   			type: 'success',
-			   			showConfirmButton: false,
-	  					timer: 1200
-			   		});
-		   		}else{
-		   			addexcuse();
-		   		}
-		   }
-		 });
-	});
-}
-$("#adduseral").submit(function() {
-
-    var url = "query.php?func=nusuario&type=colalu"; // the script where you handle the form input.
-
-    $.ajax({
-           type: "POST",
-           url: url,
-           data: $("#adduseral").serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-			   window.location = "ins_alumnos.php?type=grupoview&id=<?php echo $_GET['id'];?>";
-			   
-           }
-         });
-
-    return false; // avoid to execute the actual submit of the form.
-});
-$("#excusevalue").change(function(){
-	if($(this).val() === "o"){
-		$('.input-hidden').fadeIn();
-	}else{
-		$('.input-hidden').fadeOut();
-	}
-});
-var completos = 0;
-$('.sendall').click(function(){
-    completos = 0;
-    $('.senddata').each(function(iteration,element){
-    	if($(this).data('nivel')+"."+$(this).data('libro') === $('#nivell'+$(element).data('id')).val()+"."+$('#libroboxm'+$(element).data('id')).val() && $(element).attr('data-excuse') == 0){
-    		if($('#librobox'+$(element).data('id')).next().data('type') != 'alert'){
-	    		$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').removeClass('show');
-    			$('#librobox'+$(element).data('id')).after('<a class="excuse-modal show" data-type="alert" data-id="'+$(element).data('id')+'" rel="tooltip" data-original-title="No hay avance"><i class="fa fa-info-circle"></i></a>');
-
-				$('.excuse-modal').tooltip();
-				$('a[data-type="alert"].show').click(function(){
-					$("#excuseduser").val($(this).data('id'));
-					$("#notifystop").modal('show');
-				});
-    		}else{
-	    		$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').removeClass('show');
-    			$('#librobox'+$(element).data('id')).next('.excuse-modal').addClass('show');
-    		}
-    		var notcomplete = true;
-    	}else{
-    		if($('#librobox'+$(element).data('id')).next('a').data('type') == 'alert'){
-    			$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
-    		}
-    		if(notcomplete == true){
-    		}else{
-	    		if($('#librobox'+$(element).data('id')).next().data('type') != 'checkedstatus'){
-    				$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
-					$('#librobox'+$(element).data('id')).after('<a class="excuse-modal show checkedstatus" data-id="'+$(element).data('id')+'"><i class="fa fa-check"></i></a>');
-					completos += 1;
-	    		}else{
-    				$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
-	    			$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').addClass('show');
-					completos += 1;
-	    		}
-    		}
-    	}
-
-    	if($('a[data-type="alert"].show').length===0&&completos == <?php echo $result_us;?>){
-			$('.senddata').each(function(){
-				$.ajax({
-				   type: "POST",
-				   url: "query.php?func=updatelevel",
-				   data: $(this).serialize(), // serializes the form's elements.
-				   success: function(data)
-				   {
-				   }
-				 });
-			});
-			swal({
-				title: '¡Listo!',
-				text: 'Se han guardado los avances de este mes',
-				type: 'success',
-	  			timer: 5000
-			}).then(function(){
-			 	location.reload();
-			});
-    	}else{
-    		swal({
-				title: '¡Alerta!',
-				text: 'Hay campos que todavía no son capturados',
-				type: 'warning',
-	  			timer: 3200
-			})
-    	}
-    });
-    addexcuse();
-		
-});
-</script>
 
 
 <?php }else{
@@ -1149,3 +1002,158 @@ $(".senddata").submit(function() {
     return false; // avoid to execute the actual submit of the form.
 });*/
 ?>
+<script>
+$("#adduseral").submit(function() {
+
+    var url = "query.php?func=nusuario&type=colalu"; // the script where you handle the form input.
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $("#adduseral").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+			   window.location = "ins_alumnos.php?type=grupoview&id=<?php echo $_GET['id'];?>";
+			   
+           }
+         });
+
+    return false; // avoid to execute the actual submit of the form.
+});
+$("#excusevalue").change(function(){
+	if($(this).val() === "o"){
+		$('.input-hidden').fadeIn();
+	}else{
+		$('.input-hidden').fadeOut();
+	}
+});
+var completos = 0;
+$('.sendall').click(function(){
+    completos = 0;
+    $('.senddata').each(function(iteration,element){
+    	if($(this).data('nivel')+"."+$(this).data('libro') === $('#nivell'+$(element).data('id')).val()+"."+$('#libroboxm'+$(element).data('id')).val() && $(element).attr('data-excuse') == 0){
+    		if($('#librobox'+$(element).data('id')).next().data('type') != 'alert'){
+	    		$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').removeClass('show');
+    			$('#librobox'+$(element).data('id')).after('<a class="excuse-modal show" data-type="alert" data-id="'+$(element).data('id')+'" rel="tooltip" data-original-title="No hay avance"><i class="fa fa-info-circle"></i></a>');
+
+				$('.excuse-modal').tooltip();
+				$('a[data-type="alert"].show').click(function(){
+					$("#excuseduser").val($(this).data('id'));
+					$("#notifystop").modal('show');
+				});
+    		}else{
+	    		$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').removeClass('show');
+    			$('#librobox'+$(element).data('id')).next('.excuse-modal').addClass('show');
+    		}
+    		var notcomplete = true;
+    	}else{
+    		if($('#librobox'+$(element).data('id')).next('a').data('type') == 'alert'){
+    			$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
+    		}
+    		if(notcomplete == true){
+    		}else{
+	    		if($('#librobox'+$(element).data('id')).next().data('type') != 'checkedstatus'){
+    				$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
+					$('#librobox'+$(element).data('id')).after('<a class="excuse-modal show checkedstatus" data-id="'+$(element).data('id')+'"><i class="fa fa-check"></i></a>');
+					completos += 1;
+	    		}else{
+    				$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
+	    			$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').addClass('show');
+					completos += 1;
+	    		}
+    		}
+    	}
+
+    	if($('a[data-type="alert"].show').length===0&&completos == <?php echo $result_us;?>){
+			$('.senddata').each(function(){
+				$.ajax({
+				   type: "POST",
+				   url: "query.php?func=updatelevel",
+				   data: $(this).serialize(), // serializes the form's elements.
+				   success: function(data)
+				   {
+				   }
+				 });
+			});
+			$(document.excuses).each(function(){
+				console.log(this);
+				e = this;
+		   		swal({
+		   			text: 'Procesando',
+			   		showConfirmButton: false,
+		   		});
+				$.ajax({
+				   type: "GET",
+				   url: "/excuse/create",
+				   data: {
+				   		user_id: e.user_id,
+				   		excuse: e.excuse,
+				   		description: e.description
+				   }, 
+				   error: function(data)
+				   {
+				   		$('.senddata[data-id="'+e.user_id+'"]').attr('data-excuse',0);
+
+				   		swal({
+				   			text: 'Ocurrió un problema',
+				   			type: 'error'
+				   		});
+				   },
+				   success: function(data)
+				   {
+						swal({
+							title: '¡Listo!',
+							text: 'Se han guardado los avances de este mes',
+							type: 'success',
+				  			timer: 5000
+						}).then(function(){
+						 	location.reload();
+						});
+				   }
+				 });
+			});
+    	}else{
+    		swal({
+				title: '¡Alerta!',
+				text: 'Hay campos que todavía no son capturados',
+				type: 'warning',
+	  			timer: 3200
+			})
+    	}
+    });
+});
+
+function notifyDone(u){
+   		$('.senddata[data-id="'+u+'"]').attr('data-excuse',1);
+   		if($('.senddata[data-id="'+u+'"]').data('excuse') == 1){
+    		if($('#librobox'+u).next().data('type') != 'checkedstatus'){
+				$('#librobox'+u).next('.excuse-modal').removeClass('show');
+				$('#librobox'+u).after('<a class="excuse-modal show checkedstatus" data-id="'+u+'"><i class="fa fa-check"></i></a>');
+    		}else{
+				$('#librobox'+u).next('.excuse-modal').removeClass('show');
+    			$('#librobox'+u).next('.excuse-modal.checkedstatus').addClass('show');
+    		}
+	   		swal({
+	   			text: '¡Hecho!',
+	   			type: 'success',
+	   			showConfirmButton: false,
+					timer: 1200
+	   		});
+   		}else{
+   			alert("Hey!");
+   		}
+}
+document.excuses = [];
+$('#submitExcuse').click(function(){
+	document.excuses.push(
+		{
+		   		user_id: $('#excuseduser').val(),
+		   		excuse: $('#excusevalue').val(),
+		   		description: $('.input-hidden').val()
+		}
+	);
+
+   	$('#notifystop').modal('hide');
+	notifyDone($('#excuseduser').val());
+}); 
+</script>	
