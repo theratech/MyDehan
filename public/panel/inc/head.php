@@ -87,9 +87,6 @@ $res = mysqli_query($D,$query);
 		<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 		<!-- jQuery UI -->
 		<link href="css/jquery-ui.css" rel="stylesheet">
-		
-		
-      <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
 		<!-- Bootstrap Switch -->
 		<link href="css/bootstrap-switch.css" rel="stylesheet">
 		<!-- jQuery Datatables -->
@@ -100,6 +97,7 @@ $res = mysqli_query($D,$query);
 		<link href="css/font-awesome.min.css" rel="stylesheet">		
 		<!-- Custom CSS -->
 		<link href="css/style.css?version" rel="stylesheet">
+		<link href="/js/sweetalert/sweetalert.min.css" rel="stylesheet">
 		
 		<!--[if IE]>
 			<link rel="stylesheet" type="text/css" href="css/style-ie.css" />
@@ -108,6 +106,8 @@ $res = mysqli_query($D,$query);
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="index.html#">
 	  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	  <script src="/js/sweetalert/sweetalert.min.js"></script>
+	  <script src="/panel/js/morris.js"></script>
 	</head>
 	
 	<body>

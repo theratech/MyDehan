@@ -13,6 +13,23 @@ include("inc/head.php");?>
 	min-height:auto;
 	min-width:auto;
 }
+.excuse-modal{
+	margin-left: 10px;
+	display:none !important;
+}
+.excuse-modal[data-type='alert']{
+	color: #F00;
+}
+.excuse-modal.checkedstatus{
+	color: #00c368;
+}
+.excuse-modal.show{
+	margin-left: 10px;
+	display:block !important;
+}
+.input-hidden{
+	display:none;
+}
 </style>
 <?php if($_GET['type']=="grupoview"&&$_GET['id']){?>
 		
@@ -89,6 +106,7 @@ $res = mysqli_query($D,$query);
 										 
 										  $query_gr = "SELECT * FROM usuarios u inner join alumnos_datos ad ON u.u_id = ad.ad_ua WHERE u.u_rango = 1 AND ad.ad_grupo = '".$_GET['id']."' AND u.u_activo !=0 ORDER BY  u_apellidos";
 										  $usuarios_q = $query_gr;
+										  $result_us = mysqli_num_rows(mysqli_query($D,$query_gr));
 $res_gr = mysqli_query($D,$query_gr);
 										  
 									
@@ -106,20 +124,28 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
  $squery = mysqli_query($D,"SELECT * FROM alumnos_libros al inner join libros l ON al.al_libro_actual = l.l_id WHERE al_id = '".$res_libr['MAX(al_id)']."'"); $nivel = mysqli_fetch_array($squery,MYSQLI_ASSOC);
 											if($res_gr){
 												?>
-                                                <tr <?php if($sesion['u_rango']==3||$sesion['u_rango']==7||$sesion['u_rango']==8){
-													if(($nivel['al_stock']*-1)>=20){
-												echo "class='success'";	
-												}else if(($nivel['al_stock']*-1)<=3){
-												echo "class='danger'";	
-												}
-												}?>><form class="senddata" method="POST" action="query.php?func=updatelevel">
-                                                  
-                                                  <td><a href="ins_alumnos.php?type=userview&id=<?php echo $gr_id;?>" style="color:#09F; font-weight:500;"><?php echo $gr_nombre;?><?php if($gr_apellido){ echo " ".$gr_apellido;} ?></a></td>
-                                                  
-                                                  <td><?php echo $nivel['l_nivel'].".".$nivel['l_nombre'];?><input style="display:none" type="text" value="<?php echo $nivel['l_id'];?>" name="actbook"/></td>
+<form class="senddata" data-nivel="<?php echo $nivel['l_nivel']; ?>" data-libro="<?php echo $nivel['l_nombre'];?>" data-id="<?php echo $gr_id; ?>" data-excuse="0"  method="POST" action="query.php?func=updatelevel">
+    <tr 
+    <?php if($sesion['u_rango']==3||$sesion['u_rango']==7||$sesion['u_rango']==8){
+			if(($nivel['al_stock']*-1)>=20){
+				echo "class='success'";	
+			}else if(($nivel['al_stock']*-1)<=3){
+				echo "class='danger'";	
+			}
+		}?> >
+	        <td>
+	        	<a href="ins_alumnos.php?type=userview&id=<?php echo $gr_id;?>" style="color:#09F; font-weight:500;"><?php echo $gr_nombre;?><?php if($gr_apellido){ echo " ".$gr_apellido;} ?>
+	        		
+	        	</a>
+	        </td>
+            <td>
+            	<?php echo $nivel['l_nivel'].".".$nivel['l_nombre'];?>
+
+            	<input type="hidden" value="<?php echo $nivel['l_id'];?>" name="actbook"/>
+            </td>
 
   <!-- Selector de Niveles !-->
-  <td>                     
+  <td style="display:inline-flex; width:100%; vertical-align: center;">                     
   <?php 
   	// Preescolar
   	if($gr_n_id == 1){
@@ -320,7 +346,8 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
   </td>
                                                   <?php if($sesion['u_rango']==3||$sesion['u_rango']==7||$sesion['u_rango']==8){?><td><?php echo ($nivel['al_stock']*-1);?></td><?php }?>
                                                            
-                                                </form></tr>
+    </tr>
+</form>
                                                 <?php
 									}
 										}
@@ -339,7 +366,7 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
                                                     <td>
                                                     </td>
                                                     <td>
-                                              <a class="sendall btn btn-success pull-right disabled" href="#">Guardar Todo</a>
+                                              <a class="sendall btn btn-primary pull-right" id="enviarTodo" href="#">Verificar</a>
                                               </td>
                                               	</tr>
                                               </tbody>
@@ -412,6 +439,36 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
         <a class="btn btn-default" data-dismiss="modal">Cerrar</a>
         <button type="submit" class="btn btn-primary">Guardar</button></form>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="notifystop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><b>Notificar que no hubo ningun avance</b></h4>
+      </div>
+      <form id="addexcuse">
+	      <div class="modal-body">
+	        	<input type="hidden" id="excuseduser" name="user_id">
+	        	<select name="excuse" class="form-control" id="excusevalue">
+	        		<option value="1">Inasistencia</option>
+	        		<option value="2">Capacidades Especiales</option>
+	        		<option value="3">No trabajó DEHAN</option>
+	        		<option value="5">Alumno dado de baja</option>
+	        		<option value="6">Alumno duplicado</option>
+	        		<option value="o">Otra</option>
+	        	</select>
+	        <br/>
+	        <input type="text" name="excusedescription" class="form-control input-hidden" placeholder="Especifique la razón">
+	      </div>
+	      <div class="modal-footer" style="margin-top:0;">
+	        <a class="btn btn-default" data-dismiss="modal">Cerrar</a>
+	        <a class="btn btn-success" id="submitExcuse">Enviar</a>
+	      </div>
+      </form>
     </div>
   </div>
 </div>
@@ -622,6 +679,7 @@ $res = mysqli_query($D,$query);
                                               <?php 
 										 
 										  $query_gr = "SELECT * FROM usuarios u inner join alumnos_datos ad ON u.u_id = ad.ad_ua WHERE u.u_rango = 1 AND u.u_id = '".$_GET['id']."'";
+
 $res_gr = mysqli_query($D,$query_gr);
 										  
 									
@@ -692,45 +750,6 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
 <?php }?>
 <?php include("inc/footer.php");?>
 
-<script>
-$("#adduseral").submit(function() {
-
-    var url = "query.php?func=nusuario&type=colalu"; // the script where you handle the form input.
-
-    $.ajax({
-           type: "POST",
-           url: url,
-           data: $("#adduseral").serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-			   window.location = "ins_alumnos.php?type=grupoview&id=<?php echo $_GET['id'];?>";
-			   
-           }
-         });
-
-    return false; // avoid to execute the actual submit of the form.
-});
-$('.sendall').click(function(){
-    $('.senddata').each(function(){
-    	if($(this).children('.levelselector').value() == $(this).children('.levelselector').data('value') && $(this).children('.bookselector').value() == $(this).children('.bookselector').data('value')){
-    		swal('Son los mismos datos para este alumno');
-    	}else{
-			$(".sendall").addClass("disabled");
-			$.ajax({
-	           type: "POST",
-	           url: "query.php?func=updatelevel",
-	           data: $(this).serialize(), // serializes the form's elements.
-	           success: function(data)
-	           {
-				   swal('Listo','Datos Guardados','success');
-				   location.reload();
-	           }
-	         });
-    	}
-    });
-		
-});
-</script>
  <?php 
 										 
 										  $query_u = $usuarios_q;
@@ -773,29 +792,165 @@ setInterval(function(){
 	}
 	}, 1000);
 								</script>
-
-                                <?php }  }
-									}?>
 <?php
-/*
-$(".senddata").submit(function() {
+}
+?>
 
-    var url = "query.php?func=updatelevel"; // the script where you handle the form input.
+<?php if($_GET['type']=="grupoview"&&$_GET['id']){?>
+
+<script>
+var addexcuse = function(){
+	$('#submitExcuse').click(function(){
+		$.ajax({
+		   type: "GET",
+		   url: "/excuse/create",
+		   data: {
+		   		user_id: $('#excuseduser').val(),
+		   		excuse: $('#excusevalue').val(),
+		   		description: $('.input-hidden').val()
+		   }, 
+		   beforeSend: function()
+		   {
+		   		swal({
+		   			text: 'Procesando'
+		   		});
+		   		$('#notifystop').modal('hide');
+		   },
+		   error: function(data)
+		   {
+		   		$('.senddata[data-id="'+$('#excuseduser').val()+'"]').attr('data-excuse',0);
+
+		   		swal({
+		   			text: 'Ocurrió un problema',
+		   			type: 'error'
+		   		});
+		   },
+		   success: function(data)
+		   {
+		   		$('.senddata[data-id="'+$('#excuseduser').val()+'"]').attr('data-excuse',1);
+		   		if($('.senddata[data-id="'+$('#excuseduser').val()+'"]').data('excuse') === 1){
+			   		$('.excuse-modal[data-id="'+$('#excuseduser').val()+'"]').addClass('checkedstatus');
+
+		    		if($('#librobox'+$('#excuseduser').val()).next().data('type') != 'checkedstatus'){
+	    				$('#librobox'+$('#excuseduser').val()).next('.excuse-modal').removeClass('show');
+						$('#librobox'+$('#excuseduser').val()).after('<a class="excuse-modal show checkedstatus" data-id="'+$('#excuseduser').val()+'"><i class="fa fa-check"></i></a>');
+						completos += 1;
+		    		}else{
+	    				$('#librobox'+$('#excuseduser').val()).next('.excuse-modal').removeClass('show');
+		    			$('#librobox'+$('#excuseduser').val()).next('.excuse-modal.checkedstatus').addClass('show');
+						completos += 1;
+		    		}
+			   		swal({
+			   			text: '¡Hecho!',
+			   			type: 'success',
+			   			showConfirmButton: false,
+	  					timer: 1200
+			   		});
+		   		}else{
+		   			addexcuse();
+		   		}
+		   }
+		 });
+	});
+}
+$("#adduseral").submit(function() {
+
+    var url = "query.php?func=nusuario&type=colalu"; // the script where you handle the form input.
 
     $.ajax({
            type: "POST",
            url: url,
-           data: $(".senddata").serialize(), // serializes the form's elements.
+           data: $("#adduseral").serialize(), // serializes the form's elements.
            success: function(data)
            {
-			   
+			   window.location = "ins_alumnos.php?type=grupoview&id=<?php echo $_GET['id'];?>";
 			   
            }
          });
 
     return false; // avoid to execute the actual submit of the form.
-});*/
+});
+$("#excusevalue").change(function(){
+	if($(this).val() === "o"){
+		$('.input-hidden').fadeIn();
+	}else{
+		$('.input-hidden').fadeOut();
+	}
+});
+var completos = 0;
+$('.sendall').click(function(){
+    completos = 0;
+    $('.senddata').each(function(iteration,element){
+    	if($(this).data('nivel')+"."+$(this).data('libro') === $('#nivell'+$(element).data('id')).val()+"."+$('#libroboxm'+$(element).data('id')).val() && $(element).attr('data-excuse') == 0){
+    		if($('#librobox'+$(element).data('id')).next().data('type') != 'alert'){
+	    		$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').removeClass('show');
+    			$('#librobox'+$(element).data('id')).after('<a class="excuse-modal show" data-type="alert" data-id="'+$(element).data('id')+'" rel="tooltip" data-original-title="No hay avance"><i class="fa fa-info-circle"></i></a>');
+
+				$('.excuse-modal').tooltip();
+				$('a[data-type="alert"].show').click(function(){
+					$("#excuseduser").val($(this).data('id'));
+					$("#notifystop").modal('show');
+				});
+    		}else{
+	    		$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').removeClass('show');
+    			$('#librobox'+$(element).data('id')).next('.excuse-modal').addClass('show');
+    		}
+    		var notcomplete = true;
+    	}else{
+    		if($('#librobox'+$(element).data('id')).next('a').data('type') == 'alert'){
+    			$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
+    		}
+    		if(notcomplete == true){
+    		}else{
+	    		if($('#librobox'+$(element).data('id')).next().data('type') != 'checkedstatus'){
+    				$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
+					$('#librobox'+$(element).data('id')).after('<a class="excuse-modal show checkedstatus" data-id="'+$(element).data('id')+'"><i class="fa fa-check"></i></a>');
+					completos += 1;
+	    		}else{
+    				$('#librobox'+$(element).data('id')).next('.excuse-modal').removeClass('show');
+	    			$('#librobox'+$(element).data('id')).next('.excuse-modal.checkedstatus').addClass('show');
+					completos += 1;
+	    		}
+    		}
+    	}
+
+    	if($('a[data-type="alert"].show').length===0&&completos == <?php echo $result_us;?>){
+			$('.senddata').each(function(){
+				$.ajax({
+				   type: "POST",
+				   url: "query.php?func=updatelevel",
+				   data: $(this).serialize(), // serializes the form's elements.
+				   success: function(data)
+				   {
+				   }
+				 });
+			});
+			swal({
+				title: '¡Listo!',
+				text: 'Se han guardado los avances de este mes',
+				type: 'success',
+	  			timer: 5000
+			}).then(function(){
+			 	location.reload();
+			});
+    	}else{
+    		swal({
+				title: '¡Alerta!',
+				text: 'Hay campos que todavía no son capturados',
+				type: 'warning',
+	  			timer: 3200
+			})
+    	}
+    });
+    addexcuse();
+		
+});
+</script>
+
+
+<?php }else{
 ?>
+
 <?php $almes = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");?>
 <script>
 		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
@@ -969,3 +1124,28 @@ $smeses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto
 });
 // query.php?func=desactiva&u_id=<?php echo $gr_id;?>
 	</script>
+
+
+
+<?php }  }
+	}?>
+<?php
+/*
+$(".senddata").submit(function() {
+
+    var url = "query.php?func=updatelevel"; // the script where you handle the form input.
+
+    $.ajax({
+           type: "POST",
+           url: url,
+           data: $(".senddata").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+			   
+			   
+           }
+         });
+
+    return false; // avoid to execute the actual submit of the form.
+});*/
+?>
