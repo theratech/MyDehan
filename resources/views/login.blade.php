@@ -61,7 +61,6 @@ date_default_timezone_set("America/Mexico_City");
     <body class="login-content">
         <!-- Login -->
         <div class="lc-block toggled" id="l-login">
-        
             <div id="loader">
                 <div class="sk-spinner sk-spinner-double-bounce" style="width:60px; height:60px;">
                    <div class="sk-double-bounce1" style="background:#0E0076;"></div>
@@ -74,31 +73,55 @@ date_default_timezone_set("America/Mexico_City");
             </div>
             <form id="loginForm" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
-                <h1>
-                            <img src="img/logo_small.png" width="150px"></h1>
-                <br/>
-                <div class="input-group m-b-20">
-                    <span class="input-group-addon"><i class="icon icon-user"></i></span>
-                    <div class="fg-line">
-                        <input type="text" autocomplete="off" autofocus id="username" name="username" class="form-control" placeholder="Usuario">
+
+                @if( date('m') == '07')
+                    <h1><img src="/img/notacierre.png" width="350px"/></h1>
+                    <br/>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="icon icon-user"></i></span>
+                        <div class="fg-line">
+                            <input type="text" autocomplete="off" autofocus id="username" name="username" class="form-control" placeholder="Usuario">
+                        </div>
                     </div>
-                </div>
-                
-                <div class="input-group m-b-20">
-                    <span class="input-group-addon"><i class="icon icon-lock"></i></span>
-                    <div class="fg-line">
-                        <input type="password" id="password" name="pass" class="form-control" placeholder="Contraseña">
+                    
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="icon icon-lock"></i></span>
+                        <div class="fg-line">
+                            <input type="password" id="password" name="pass" class="form-control" placeholder="Contraseña">
+                        </div>
                     </div>
-                </div>
-               
-                
-                <button type="submit" class="btn btn-login btn-primary btn-float" id="login" style="padding-top:8px;"><i class="icon fa-btn icon-arrow-right"></i></button>
-                
+                   
+                    
+                    <button type="submit" class="btn btn-login btn-primary btn-float" id="login" style="padding-top:8px;"><i class="icon fa-btn icon-arrow-right"></i></button>
+                    
+                @elseif( date('m') == '08')
+                    <img src="/img/cerrado.png" width="350px"/>
+                @else        
+                    <h1><img src="img/logo_small.png" width="150px"></h1>
+                    <br/>
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="icon icon-user"></i></span>
+                        <div class="fg-line">
+                            <input type="text" autocomplete="off" autofocus id="username" name="username" class="form-control" placeholder="Usuario">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group m-b-20">
+                        <span class="input-group-addon"><i class="icon icon-lock"></i></span>
+                        <div class="fg-line">
+                            <input type="password" id="password" name="pass" class="form-control" placeholder="Contraseña">
+                        </div>
+                    </div>
+                   
+                    
+                    <button type="submit" class="btn btn-login btn-primary btn-float" id="login" style="padding-top:8px;"><i class="icon fa-btn icon-arrow-right"></i></button>
+                    
+                @endif
             </form>
         </div>
-            <div id="branding" style="bottom:29px;left: 20px;position: absolute; display:block !important;color: rgba(0,0,0, 0.58); opacity: 0.5;"><img src="http://www.thera.tech/wp-content/uploads/2017/04/logo-white.png" width="85px"> <b style="color:#FFF;"></b></div>
+
+            <div id="branding" style="bottom:29px;left: 20px;position: absolute; display:block !important;color: rgba(0,0,0, 0.58); opacity: 0.5;"><img src="https://www.thera.tech/wp-content/uploads/2018/04/Logo-White.png" width="85px"> <b style="color:#FFF;"></b></div>
             <div id="branding" style="bottom:20px;right: 20px;position: absolute; text-align: right; display:block !important;color: rgba(255,255,255, 0.58);"><a class="btn btn-link" href="https://www.mydehan.com/privacy.pdf" target="new">Aviso de Privacidad</a></div>
-        
         <!-- Older IE warning message -->
         <!--[if IE]>
             <div class="ie-warning">
