@@ -1065,16 +1065,19 @@ $('.sendall').click(function(){
     	}
 
     	if($('a[data-type="alert"].show').length===0&&completos == <?php echo $result_us;?>){
-			$('.senddata').each(function(){
-				$.ajax({
-				   type: "POST",
-				   url: "query.php?func=updatelevel",
-				   data: $(this).serialize(), // serializes the form's elements.
-				   success: function(data)
-				   {
-				   }
-				 });
-			});
+			if(notcomplete != true)
+			{
+				$('.senddata').each(function(){
+					$.ajax({
+					   type: "POST",
+					   url: "query.php?func=updatelevel",
+					   data: $(this).serialize(), // serializes the form's elements.
+					   success: function(data)
+					   {
+					   }
+					 });
+				});
+			}
 			$(document.excuses).each(function(){
 				console.log(this);
 				e = this;
@@ -1110,7 +1113,7 @@ $('.sendall').click(function(){
 						 	location.reload();
 						});
 				   }
-				 });
+				});
 			});
     	}else{
     		swal({
