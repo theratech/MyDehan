@@ -366,7 +366,7 @@ $res_lib = mysqli_query($D,$query_lib);		$res_libr = mysqli_fetch_array($res_lib
                                                     <td>
                                                     </td>
                                                     <td>
-                                              <a class="sendall btn btn-primary pull-right" id="enviarTodo" href="#">Verificar</a>
+                                              <a class="sendall btn btn-primary pull-right" id="enviarTodo" href="#">Guardar Todo</a>
                                               </td>
                                               	</tr>
                                               </tbody>
