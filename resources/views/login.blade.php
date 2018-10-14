@@ -119,9 +119,10 @@ date_default_timezone_set("America/Mexico_City");
                 @endif
             </form>
         </div>
-
-            <div id="branding" style="bottom:29px;left: 20px;position: absolute; display:block !important;color: rgba(0,0,0, 0.58); opacity: 0.5;"><img src="https://www.thera.tech/wp-content/uploads/2018/04/Logo-White.png" width="85px"> <b style="color:#FFF;"></b></div>
+	<a href="https://www.thera.tech/">
+            <div id="branding" style="bottom:29px;left: 20px;position: absolute; display:block !important;color: rgba(0,0,0, 0.58); opacity: 0.5;"><img src="https://www.thera.tech/wp-content/uploads/2018/09/ConIntelWhite.png" width="135px"> <b style="color:#FFF;"></b></div>
             <div id="branding" style="bottom:20px;right: 20px;position: absolute; text-align: right; display:block !important;color: rgba(255,255,255, 0.58);"><a class="btn btn-link" href="https://www.mydehan.com/privacy.pdf" target="new">Aviso de Privacidad</a></div>
+        </a>
         <!-- Older IE warning message -->
         <!--[if IE]>
             <div class="ie-warning">
