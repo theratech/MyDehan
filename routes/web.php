@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Route::get('me', 'AlumnoController@index');
 
+Route::get('videos', function(){
+	return view('videos');
+});
+
 Route::resource('activity', 'ActivityController');
 Route::get('excuse/create', 'ExcuseController@store');
 Route::get('/print','ActivityController@print');

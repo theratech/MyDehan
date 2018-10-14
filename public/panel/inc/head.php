@@ -230,11 +230,10 @@ $res = mysqli_query($D,$query);
                             <li class="current"><a href="rows.php?filter=representantes"><i class="fa fa-user" id="menut3"></i> Representantes</a></li>
                             
 							<?php }?>
-                           
-                           
-						 
-                         
-                         
+                            <?php if($sesion['u_rango']!=1){?>
+                            <li class="current"><a href="/videos/"><i class="fa fa-video-camera" id="menut4"></i> Videos</a></li>
+                            
+							<?php }?>
                                                   
                      </ul> 
                                
